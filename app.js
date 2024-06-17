@@ -16,9 +16,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/getUserData/:id", validateDbId, async(req, res, next) => {
-    const { id } = req.params;
+    console.log(req.params.id);
     try {
-        const user = await UserEvents.findById(id);
+        const user = await UserEvents.findById({ _id: req.params.id });
         if (user) {
             return res.status(200).json({ data: user });
         } else {
@@ -61,6 +61,7 @@ app.post("/saveUserData", async(req, res) => {
 });
 
 app.put("/updateUserData/:id", async(req, res) => {
+    console.log(req.params.id);
     const {
         totalEventsPlayed,
         pointsEarned,
