@@ -20,7 +20,7 @@ app.get("/getUserData/:id", validateDbId, async(req, res, next) => {
     try {
         const user = await UserEvents.findById(id);
         if (user) {
-            return res.status(200).json(user);
+            return res.status(200).json({ data: user });
         } else {
             return res.status(404).json({ message: "User Data not found" });
         }
@@ -51,7 +51,7 @@ app.post("/saveUserData", async(req, res) => {
                 rsvpdEvents,
             });
             const data = await UserEvents.create(newUserEvent);
-            return res.status(200).json({ data });
+            return res.status(200).json({ data: data });
         } else {
             return res.status(400).json({ message: "User Data Already Saved" });
         }
@@ -81,7 +81,7 @@ app.put("/updateUserData/:id", async(req, res) => {
             }, { upsert: true, new: true }
         );
         if (user) {
-            res.status(200).json({ user });
+            res.status(200).json({ data: user });
         } else {
             res.status(404).json({ message: "No user found" });
         }
