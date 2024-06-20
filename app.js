@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 app.get("/getUserData/:id",async(req, res, next) => {
     console.log(req.params.id);
     try {
-        const user = await UserEvents.findById({ _id: req.params.id });
+        const user = await UserEvents.findById(req.params.id);
         if (user) {
             return res.status(200).json({ data: user });
         } else {
