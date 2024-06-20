@@ -32,18 +32,20 @@ app.get("/getUserData/:id", validateDbId, async(req, res, next) => {
 
 app.post("/saveUserData", async(req, res) => {
     const {
-        _id,
+        id,
         totalEventsPlayed,
         pointsEarned,
         pointsRedeemed,
         upcomingEvents,
         rsvpdEvents,
     } = req.body;
+    // console.log("ID: ", id);
     try {
-        const userExists = await UserEvents.findById(_id);
+        const userExists = await UserEvents.findById({_id: id});
+        console.log("UserExists: ", userExists);
         if (!userExists) {
             const newUserEvent = new UserEvents({
-                _id,
+                _id : id,
                 totalEventsPlayed,
                 pointsEarned,
                 pointsRedeemed,
@@ -71,7 +73,7 @@ app.put("/updateUserData/:id", async(req, res) => {
     } = req.body;
     try {
         const user = await UserEvents.findByIdAndUpdate(
-            req.params.id, {
+            {_id : req.params.id}, {
                 $set: {
                     totalEventsPlayed,
                     pointsEarned,
