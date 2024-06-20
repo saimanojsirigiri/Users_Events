@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
     res.send("Hello");
 });
 
-app.get("/getUserData/:id", validateDbId, async(req, res, next) => {
+app.get("/getUserData/:id",async(req, res, next) => {
     console.log(req.params.id);
     try {
         const user = await UserEvents.findById({ _id: req.params.id });
