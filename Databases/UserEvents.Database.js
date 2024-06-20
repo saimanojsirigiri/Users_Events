@@ -4,7 +4,8 @@ const schema = mongoose.Schema;
 const userEventsSchema = new schema({
     _id: {
         type: String,
-        default: "",
+        required: true,
+        unique: true,
     },
     totalEventsPlayed: {
         type: String,
