@@ -71,6 +71,7 @@ app.put("/updateUserData/:id", async(req, res) => {
         upcomingEvents,
         rsvpdEvents,
     } = req.body;
+    console.log("RsvpdEvents: ", rsvpdEvents);
     try {
         const user = await UserEvents.findByIdAndUpdate(
             req.params.id, {
@@ -83,6 +84,7 @@ app.put("/updateUserData/:id", async(req, res) => {
                 }
             }, { upsert: true, new: true }
         );
+        console.log("User: ", user);
         if (user) {
             res.status(200).json({ data: user });
         } else {
