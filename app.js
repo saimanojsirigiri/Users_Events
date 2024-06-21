@@ -73,6 +73,8 @@ app.put("/updateUserData/:id", async(req, res) => {
         rsvpdEvents,
     } = req.body;
     console.log("RsvpdEvents: ", rsvpdEvents);
+    console.log("pointsEarned: ", pointsEarned);
+    console.log("pointsRedeemed: ", pointsRedeemed);
     try {
         const user = await UserEvents.findByIdAndUpdate(
             req.params.id, {
