@@ -73,7 +73,7 @@ app.put("/updateUserData/:id", async(req, res) => {
     } = req.body;
     try {
         const user = await UserEvents.findByIdAndUpdate(
-            {_id : req.params.id}, {
+            req.params.id, {
                 $set: {
                     totalEventsPlayed,
                     pointsEarned,
